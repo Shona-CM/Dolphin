@@ -34,6 +34,7 @@ class Game
 
     std::vector<std::unique_ptr<class Entity>> mEntities;
 	std::vector<std::unique_ptr<class Entity>> mPendingEntities;
+	std::vector<std::unique_ptr<class Component>> mSprites;
 
     std::string mGameTitle = "Dolphin 2D";
 };

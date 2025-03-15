@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-
+#include "SDL2/SDL.h"
 
 class Entity
 {
@@ -26,8 +26,6 @@ class Entity
 
 
         void Update(float deltaTime);
-        void UpdateComponents(float deltaTime);
-        //override to do Entity specific updates
 	    virtual void UpdateEntity(float deltaTime);
 
 	    //basic move ,rotate and scale
@@ -55,6 +53,8 @@ class Entity
         void AddComponent(std::unique_ptr<class Component> component);
         void RemoveComponent(std::uintptr_t);
 
+        void Draw(SDL_Renderer* renderer);
+
 	protected:
         bool mIsGoingBackwards;
 
@@ -69,6 +69,10 @@ class Entity
         // store our components here
         std::vector<std::unique_ptr<class Component>> mComponents;
         class Game* const mGame;
+
+        void UpdateComponents(float deltaTime);
+        void DrawComponents(SDL_Renderer* renderer);
+
 };
 
 #endif // ENTITY_H

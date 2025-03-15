@@ -1,6 +1,8 @@
 
 #include "Game.h"
 #include "Entity.h"
+#include "SpriteComponent.h"
+
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -67,6 +69,8 @@ void Game::LoadData()
     std::unique_ptr<Entity> temp = std::make_unique<Entity>(this);
     temp->SetName("test object");
     temp->SetPosition(Vector2(400.0f, 384.0f));
+    auto tempSprite =  std::make_unique<SpriteComponent>(temp.get(),50);
+    temp->AddComponent(std::move(tempSprite));
     AddEntity(std::move(temp));
 
     std::unique_ptr<Entity> temp2 = std::make_unique<Entity>(this);

@@ -43,6 +43,19 @@ void Entity::UpdateComponents(float deltaTime)
     }
 }
 
+void Entity::Draw(SDL_Renderer* renderer)
+{
+    DrawComponents(renderer);
+}
+
+void Entity::DrawComponents(SDL_Renderer* renderer)
+{
+    for(const auto& component : mComponents)
+    {
+       component->Draw(renderer);
+    }
+}
+
 void Entity::UpdateEntity(float deltaTime)
 {
 }
