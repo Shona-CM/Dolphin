@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
+#include <memory>
 
 class Game
 {
@@ -12,20 +13,29 @@ class Game
         Game();
         ~Game();
 
-
     bool Initialize();
     void RunLoop();
     void Shutdown();
+
+    void AddEntity(std::unique_ptr<class Entity> entity);
 
     private:
     void ProcessInput();
     void Update();
     void GenerateOuput();
+    void UpdateEntities(float deltaTime);
+    void LoadData();
 
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
     Uint32 mTicksCount;
     bool mIsRunning;
+    bool mUpdatingEntities;
+
+    std::vector<std::unique_ptr<class Entity>> mEntities;
+	std::vector<std::unique_ptr<class Entity>> mPendingEntities;
+
+    std::string mGameTitle = "Dolphin 2D";
 };
 
 #endif // GAME_H
